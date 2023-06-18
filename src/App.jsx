@@ -13,6 +13,7 @@ function App() {
   const db = getDatabase(app)
   const [array, setArray] = useState([])
   const [precipi, setStatus] = useState([])
+  const [humedad, setHumidity] = useState([])
 
   useEffect(() => {
     onValue(ref(db, 'string/'), (snapshot) => {
@@ -35,6 +36,10 @@ function App() {
     onValue(ref(db, 'precipitations/'), (snapshot) => {
       const result = snapshot.val()
       setStatus(result)
+    })
+    onValue(ref(db, 'humidity/'), (snapshot) => {
+      const result = snapshot.val()
+      setHumidity(result)
     })
 
   }, [])
@@ -73,7 +78,7 @@ function App() {
         <div className="card border-primary" style={{ width: "18rem" }}>
           <div className="card-header">Humedad del Aire </div>
           <div className="card-body text-primary">
-            <h5 className="card-title display-1">{array.slice(-1)}°</h5>
+            <h5 className="card-title display-1">{humedad.slice(-1)}°</h5>
           </div>
         </div>
       </div>
